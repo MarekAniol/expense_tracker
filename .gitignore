@@ -42,3 +42,18 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+/windows/
+/linux/
+/macos/
+/web/
+/ios/
+/android/
+
+# remove generated files
+.vscode/launch.json
+.fvm/flutter_sdk
+**/*.freezed.dart
+**/*.g.dart
+
+**/*.gr.dart
