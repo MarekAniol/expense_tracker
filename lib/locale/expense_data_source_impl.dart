@@ -17,7 +17,8 @@ class ExpenseDataSourceImpl extends ExpenseDataSource {
       localModel.id,
       localModel,
     );
-    return localModel.toDomainModel();
+    final retrivedModel = expenseBox.get(localModel.id) ?? localModel;
+    return retrivedModel.toDomainModel();
   }
 
   @override
