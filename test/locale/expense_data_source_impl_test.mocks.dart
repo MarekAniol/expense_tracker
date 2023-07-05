@@ -5,6 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:expense_tracker/locale/hive_service.dart' as _i4;
+import 'package:expense_tracker/locale/models/expense_local_model.dart' as _i5;
 import 'package:hive/hive.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -18,6 +20,16 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+
+class _FakeBox_0<E> extends _i1.SmartFake implements _i2.Box<E> {
+  _FakeBox_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
 
 /// A class which mocks [Box].
 ///
@@ -258,6 +270,33 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   _i3.Future<void> flush() => (super.noSuchMethod(
         Invocation.method(
           #flush,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+}
+
+/// A class which mocks [HiveService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveService extends _i1.Mock implements _i4.HiveService {
+  @override
+  _i2.Box<_i5.ExpenseLocalModel> get expenseBox => (super.noSuchMethod(
+        Invocation.getter(#expenseBox),
+        returnValue: _FakeBox_0<_i5.ExpenseLocalModel>(
+          this,
+          Invocation.getter(#expenseBox),
+        ),
+        returnValueForMissingStub: _FakeBox_0<_i5.ExpenseLocalModel>(
+          this,
+          Invocation.getter(#expenseBox),
+        ),
+      ) as _i2.Box<_i5.ExpenseLocalModel>);
+  @override
+  _i3.Future<void> initHive() => (super.noSuchMethod(
+        Invocation.method(
+          #initHive,
           [],
         ),
         returnValue: _i3.Future<void>.value(),

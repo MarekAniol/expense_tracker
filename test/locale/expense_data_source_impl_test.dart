@@ -1,23 +1,42 @@
+import 'dart:io';
+
 import 'package:expense_tracker/domain/models/expense.dart';
 import 'package:expense_tracker/locale/expense_data_source_impl.dart';
+import 'package:expense_tracker/locale/hive_service.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path/path.dart' as path;
 
-@GenerateNiceMocks([MockSpec<Box>()])
+@GenerateNiceMocks([
+  MockSpec<Box>(),
+  MockSpec<HiveService>(),
+])
 import 'expense_data_source_impl_test.mocks.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late MockHiveService mockHiveService;
   late MockBox<ExpenseLocalModel> mockBox;
   late ExpenseDataSourceImpl expenseDataSourceImpl;
 
   setUp(
-    () {
+    () async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/path_provider'), (MethodCall methodCall) async {
+        if (methodCall.method == 'getApplicationDocumentsDirectory') {
+          return path.join(Directory.systemTemp.path, 'test_documents');
+        }
+        return null;
+      });
+      mockHiveService = MockHiveService();
       mockBox = MockBox<ExpenseLocalModel>();
+      when(mockHiveService.expenseBox).thenReturn(mockBox);
       expenseDataSourceImpl = ExpenseDataSourceImpl(
-        expenseBox: mockBox,
+        hiveService: mockHiveService,
       );
     },
   );
@@ -31,7 +50,9 @@ void main() {
       category: Category.food,
     );
 
-    when(mockBox.put(any, any)).thenAnswer((_) async => Future.value());
+    when(mockBox.put(any, any)).thenAnswer((Invocation invocation) async {
+      return Future.value();
+    });
 
     final result = await expenseDataSourceImpl.createExpense(expense);
     expect(result, equals(expense));
