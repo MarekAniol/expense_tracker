@@ -17,7 +17,7 @@ void main() {
     expenseService = ExpenseService(expenseDataSource: mockExpenseDataSource);
   });
 
-  test('should call createExpense on the ExpenseDataSource', () async {
+  test('should call saveExpense on the ExpenseDataSource', () async {
     final expense = Expense(
       id: '1',
       title: 'Coffee',
@@ -26,21 +26,40 @@ void main() {
       category: Category.food,
     );
 
-    when(mockExpenseDataSource.createExpense(any)).thenAnswer((_) async => expense);
-
-    final result = await expenseService.createExpense(expense);
-
-    verify(mockExpenseDataSource.createExpense(expense)).called(1);
-    expect(result, equals(expense));
+    when(mockExpenseDataSource.saveExpense(any)).thenAnswer((_) async => expense);
+    await expenseService.createExpense(expense);
+    verify(mockExpenseDataSource.saveExpense(expense)).called(1);
   });
 
   test('should call deleteExpense on the ExpenseDataSource', () async {
     const id = 1;
 
     when(mockExpenseDataSource.deleteExpense(any)).thenAnswer((_) async => Future.value());
-
     await expenseService.deleteExpense(id);
-
     verify(mockExpenseDataSource.deleteExpense(id)).called(1);
+  });
+
+  test('should call getAllExpenses on the ExpenseDataSource and return List of Expenses', () async {
+    final expenses = [
+      Expense(
+        id: '1',
+        title: 'Coffee',
+        amount: 3.5,
+        date: DateTime.now(),
+        category: Category.food,
+      ),
+      Expense(
+        id: '2',
+        title: 'Tea',
+        amount: 3,
+        date: DateTime.now(),
+        category: Category.food,
+      )
+    ];
+
+    when(mockExpenseDataSource.getAllExpenses()).thenAnswer((_) async => expenses);
+    final result = await expenseService.getAllExpenses();
+    verify(mockExpenseDataSource.getAllExpenses()).called(1);
+    expect(result, equals(expenses));
   });
 }

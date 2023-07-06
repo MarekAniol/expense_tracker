@@ -12,7 +12,11 @@ class ExpenseService {
     await _expenseDataSource.deleteExpense(id);
   }
 
-  Future<Expense> createExpense(Expense expense) async {
-    return await _expenseDataSource.createExpense(expense);
+  Future<void> createExpense(Expense expense) async {
+    return await _expenseDataSource.saveExpense(expense);
+  }
+
+  Future<List<Expense>> getAllExpenses() async {
+    return await _expenseDataSource.getAllExpenses();
   }
 }
