@@ -54,7 +54,7 @@ void main() {
       return Future.value();
     });
 
-    final result = await expenseDataSourceImpl.createExpense(expense);
+    final result = await expenseDataSourceImpl.saveExpense(expense);
     expect(result, equals(expense));
     verify(mockBox.put(any, any)).called(1);
   });

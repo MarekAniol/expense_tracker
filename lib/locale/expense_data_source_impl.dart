@@ -10,7 +10,7 @@ class ExpenseDataSourceImpl extends ExpenseDataSource {
   final HiveService _hiveService;
 
   @override
-  Future<Expense> createExpense(Expense expense) async {
+  Future<Expense> saveExpense(Expense expense) async {
     final localModel = expense.toLocalModel();
     await _hiveService.expenseBox.put(
       localModel.id,
@@ -23,5 +23,15 @@ class ExpenseDataSourceImpl extends ExpenseDataSource {
   @override
   Future<void> deleteExpense(int id) async {
     await _hiveService.expenseBox.delete(id);
+  }
+
+  @override
+  Future<List<Expense>> getAllExpenses() async {
+    List<Expense> expenses = _hiveService.expenseBox.values
+        .map(
+          (expense) => expense.toDomainModel(),
+        )
+        .toList();
+    return expenses;
   }
 }
