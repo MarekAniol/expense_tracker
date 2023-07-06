@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:expense_tracker/locale/data/hive_service.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:hive/hive.dart';
 
-class HiveService {
-  HiveService({
+class HiveServiceImpl implements HiveService {
+  HiveServiceImpl({
     required HiveInterface hive,
     required Directory documentsDirectory,
     required Box<ExpenseLocalModel> expenseBox,
@@ -15,11 +16,13 @@ class HiveService {
   final Directory _documentsDirectory;
   final Box<ExpenseLocalModel> _expenseBox;
 
+  @override
   Future<void> initHive() async {
     _hive.init(_documentsDirectory.path);
     _hive.registerAdapter(ExpenseLocalModelAdapter());
   }
 
+  @override
   Box<ExpenseLocalModel> get expenseBox {
     return _expenseBox;
   }

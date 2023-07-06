@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:expense_tracker/domain/data/expense_data_source.dart';
+import 'package:expense_tracker/locale/data/hive_service.dart';
 import 'package:expense_tracker/locale/expense_data_source_impl.dart';
-import 'package:expense_tracker/locale/hive_service.dart';
+import 'package:expense_tracker/locale/hive_service_impl.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
@@ -31,7 +32,7 @@ extension LocaleInjection on GetIt {
       })
       ..registerSingletonAsync<HiveService>(() async {
         await allReady();
-        final hiveService = HiveService(
+        final hiveService = HiveServiceImpl(
           hive: get<HiveInterface>(),
           documentsDirectory: get<Directory>(),
           expenseBox: get<Box<ExpenseLocalModel>>(),
