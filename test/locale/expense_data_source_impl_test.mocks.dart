@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:expense_tracker/locale/data/hive_service.dart' as _i4;
+import 'package:expense_tracker/locale/data/hive_local_date.dart' as _i4;
 import 'package:expense_tracker/locale/models/expense_local_model.dart' as _i5;
 import 'package:hive/hive.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -277,10 +277,10 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
       ) as _i3.Future<void>);
 }
 
-/// A class which mocks [HiveService].
+/// A class which mocks [HiveLocalData].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHiveService extends _i1.Mock implements _i4.HiveService {
+class MockHiveLocalData extends _i1.Mock implements _i4.HiveLocalData {
   @override
   _i2.Box<_i5.ExpenseLocalModel> get expenseBox => (super.noSuchMethod(
         Invocation.getter(#expenseBox),

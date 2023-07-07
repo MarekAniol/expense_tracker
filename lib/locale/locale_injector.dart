@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:expense_tracker/domain/data/expense_data_source.dart';
-import 'package:expense_tracker/locale/data/hive_service.dart';
+import 'package:expense_tracker/locale/data/hive_local_date.dart';
 import 'package:expense_tracker/locale/expense_data_source_impl.dart';
-import 'package:expense_tracker/locale/hive_service_impl.dart';
+import 'package:expense_tracker/locale/hive_local_data__impl.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
@@ -14,7 +14,7 @@ extension LocaleInjection on GetIt {
     _registerHive();
     registerFactory<ExpenseDataSource>(
       () => ExpenseDataSourceImpl(
-        hiveService: get<HiveService>(),
+        hiveLocalData: get<HiveLocalData>(),
       ),
     );
   }
@@ -30,15 +30,15 @@ extension LocaleInjection on GetIt {
         final box = await Hive.openBox<ExpenseLocalModel>('expenseBox');
         return box;
       })
-      ..registerSingletonAsync<HiveService>(() async {
+      ..registerSingletonAsync<HiveLocalData>(() async {
         await allReady();
-        final hiveService = HiveServiceImpl(
+        final hiveLocalData = HiveLocalDataImpl(
           hive: get<HiveInterface>(),
           documentsDirectory: get<Directory>(),
           expenseBox: get<Box<ExpenseLocalModel>>(),
         );
-        await hiveService.initHive();
-        return hiveService;
+        await hiveLocalData.initHive();
+        return hiveLocalData;
       });
   }
 }
