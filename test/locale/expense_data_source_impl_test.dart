@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:expense_tracker/domain/models/expense.dart';
-import 'package:expense_tracker/locale/data/hive_service.dart';
+import 'package:expense_tracker/locale/data/hive_local_date.dart';
 import 'package:expense_tracker/locale/expense_data_source_impl.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:flutter/services.dart';
@@ -13,13 +13,13 @@ import 'package:path/path.dart' as path;
 
 @GenerateNiceMocks([
   MockSpec<Box>(),
-  MockSpec<HiveService>(),
+  MockSpec<HiveLocalData>(),
 ])
 import 'expense_data_source_impl_test.mocks.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late MockHiveService mockHiveService;
+  late MockHiveLocalData mockHiveLocalData;
   late MockBox<ExpenseLocalModel> mockBox;
   late ExpenseDataSourceImpl expenseDataSourceImpl;
 
@@ -33,11 +33,11 @@ void main() {
         return null;
       },
     );
-    mockHiveService = MockHiveService();
+    mockHiveLocalData = MockHiveLocalData();
     mockBox = MockBox<ExpenseLocalModel>();
-    when(mockHiveService.expenseBox).thenReturn(mockBox);
+    when(mockHiveLocalData.expenseBox).thenReturn(mockBox);
     when(mockBox.values).thenAnswer((_) => List<ExpenseLocalModel>.empty());
-    expenseDataSourceImpl = ExpenseDataSourceImpl(hiveService: mockHiveService);
+    expenseDataSourceImpl = ExpenseDataSourceImpl(hiveLocalData: mockHiveLocalData);
   });
 
   test('should call put on the box when creating an expense', () async {

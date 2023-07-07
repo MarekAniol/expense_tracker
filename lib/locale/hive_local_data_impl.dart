@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:expense_tracker/locale/data/hive_service.dart';
+import 'package:expense_tracker/locale/data/hive_local_date.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:hive/hive.dart';
 
-class HiveServiceImpl implements HiveService {
-  HiveServiceImpl({
+class HiveLocalDataImpl implements HiveLocalData {
+  HiveLocalDataImpl({
     required HiveInterface hive,
     required Directory documentsDirectory,
     required Box<ExpenseLocalModel> expenseBox,
