@@ -1,3 +1,4 @@
+import 'package:expense_tracker/presentaion/screens/home_screen/widgets/expenses_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +12,9 @@ class HomeScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text("Home Screen"),
+        Expanded(
+          child: ExpensesList(),
+        ),
       ],
     );
   }
