@@ -12,7 +12,7 @@ class ExpenseService {
     await _expenseDataSource.deleteExpense(id);
   }
 
-  Future<void> createExpense(Expense expense) async {
+  Future<void> saveExpense(Expense expense) async {
     return await _expenseDataSource.saveExpense(expense);
   }
 

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:expense_tracker/locale/data/hive_local_date.dart';
+import 'package:expense_tracker/locale/data/hive_local_data.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 import 'package:hive/hive.dart';
 
