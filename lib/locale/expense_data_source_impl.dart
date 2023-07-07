@@ -1,6 +1,6 @@
 import 'package:expense_tracker/domain/data/expense_data_source.dart';
 import 'package:expense_tracker/domain/models/expense.dart';
-import 'package:expense_tracker/locale/data/hive_local_date.dart';
+import 'package:expense_tracker/locale/data/hive_local_data.dart';
 import 'package:expense_tracker/locale/models/expense_local_model.dart';
 
 class ExpenseDataSourceImpl extends ExpenseDataSource {

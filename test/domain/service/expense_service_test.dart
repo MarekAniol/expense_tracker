@@ -27,7 +27,7 @@ void main() {
     );
 
     when(mockExpenseDataSource.saveExpense(any)).thenAnswer((_) async => expense);
-    await expenseService.createExpense(expense);
+    await expenseService.saveExpense(expense);
     verify(mockExpenseDataSource.saveExpense(expense)).called(1);
   });
 
