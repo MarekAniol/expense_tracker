@@ -4,13 +4,12 @@ import 'package:get_it/get_it.dart';
 import 'package:uuid/uuid.dart';
 
 extension DomainInjection on GetIt {
-  void registerDomain() {
-    this
-      ..registerSingleton<Uuid>(const Uuid())
-      ..registerLazySingleton<ExpenseService>(
-        () => ExpenseService(
-          expenseDataSource: get<ExpenseDataSource>(),
-        ),
-      );
+  Future<void> registerDomain() async {
+    registerSingleton<Uuid>(const Uuid());
+    registerFactory<ExpenseService>(
+      () => ExpenseService(
+        expenseDataSource: get<ExpenseDataSource>(),
+      ),
+    );
   }
 }

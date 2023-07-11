@@ -7,9 +7,8 @@ import 'package:get_it/get_it.dart';
 final injector = GetIt.instance;
 
 Future<void> init() async {
-  injector
-    ..registerDomain()
-    ..registerLocale();
+  await injector.registerDomain();
+  await injector.registerLocale();
   injector.registerFactory<HomeScreenBloc>(
     () => HomeScreenBloc(
       expenseService: injector.get<ExpenseService>(),
