@@ -22,12 +22,7 @@ class ExpenseDataSourceImpl extends ExpenseDataSource {
 
   @override
   Future<void> deleteExpense(String id) async {
-    try {
-      await _hiveLocalData.expenseBox.delete(id);
-    } catch (error) {
-      print('Error when deleting expense: $error');
-      rethrow;
-    }
+    await _hiveLocalData.expenseBox.delete(id);
   }
 
   @override
