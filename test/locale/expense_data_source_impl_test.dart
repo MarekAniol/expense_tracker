@@ -59,7 +59,7 @@ void main() {
   });
 
   test('should call delete on the box when deleting an expense', () async {
-    const id = 1;
+    const id = '1';
 
     when(mockBox.delete(any)).thenAnswer((_) async => Future.value());
 

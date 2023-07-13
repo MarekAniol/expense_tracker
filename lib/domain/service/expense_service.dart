@@ -8,7 +8,7 @@ class ExpenseService {
 
   final ExpenseDataSource _expenseDataSource;
 
-  Future<void> deleteExpense(int id) async {
+  Future<void> deleteExpense(String id) async {
     await _expenseDataSource.deleteExpense(id);
   }
 
