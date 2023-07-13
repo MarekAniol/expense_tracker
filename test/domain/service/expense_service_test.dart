@@ -32,7 +32,7 @@ void main() {
   });
 
   test('should call deleteExpense on the ExpenseDataSource', () async {
-    const id = 1;
+    const id = '1';
 
     when(mockExpenseDataSource.deleteExpense(any)).thenAnswer((_) async => Future.value());
     await expenseService.deleteExpense(id);
