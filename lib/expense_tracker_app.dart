@@ -14,12 +14,25 @@ class ExpenseTrackerApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       onGenerateRoute: appRouter.route,
-      builder: (context, child) => Scaffold(
-        appBar: AppBar(
-          title: const Text("Expense Tracker"),
-        ),
-        body: child,
+      builder: (context, child) => _BaseScreen(
+        navigatorKey: navigatorKey,
+        child: child,
       ),
     );
+  }
+}
+
+class _BaseScreen extends StatelessWidget {
+  const _BaseScreen({
+    required this.navigatorKey,
+    required this.child,
+  });
+
+  final Widget? child;
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return child ?? const SizedBox.shrink();
   }
 }
