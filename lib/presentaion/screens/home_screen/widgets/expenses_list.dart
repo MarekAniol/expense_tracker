@@ -1,4 +1,5 @@
 import 'package:expense_tracker/presentaion/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:expense_tracker/presentaion/screens/home_screen/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,8 +12,8 @@ class ExpensesList extends StatelessWidget {
       builder: (context, state) {
         return ListView.builder(
           itemCount: state.expenses.length,
-          itemBuilder: (context, index) => Text(
-            state.expenses[index].title,
+          itemBuilder: (context, index) => ExpenseItem(
+            expense: state.expenses[index],
           ),
         );
       },
