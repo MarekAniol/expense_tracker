@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
     return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text("Home Screen"),
         Expanded(
           child: ExpensesList(),
         ),
