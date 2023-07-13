@@ -44,7 +44,7 @@ class MockExpenseDataSource extends _i1.Mock implements _i2.ExpenseDataSource {
             _i3.Future<List<_i4.Expense>>.value(<_i4.Expense>[]),
       ) as _i3.Future<List<_i4.Expense>>);
   @override
-  _i3.Future<void> deleteExpense(int? id) => (super.noSuchMethod(
+  _i3.Future<void> deleteExpense(String? id) => (super.noSuchMethod(
         Invocation.method(
           #deleteExpense,
           [id],
