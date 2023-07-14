@@ -11,6 +11,14 @@ class Expense with _$Expense {
     required DateTime date,
     required Category category,
   }) = _Expense;
+
+  factory Expense.initial() => Expense(
+        id: "",
+        title: "",
+        amount: 0.0,
+        date: DateTime.now(),
+        category: Category.others,
+      );
 }
 
 enum Category {
