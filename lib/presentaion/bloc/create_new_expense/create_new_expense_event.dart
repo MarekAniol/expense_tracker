@@ -9,4 +9,10 @@ class CreateNewExpenseEvent with _$CreateNewExpenseEvent {
     required DateTime date,
     required Category category,
   }) = _ExpenseCreated;
+  const factory CreateNewExpenseEvent.datePicked({
+    required DateTime date,
+  }) = _DatePicked;
+  const factory CreateNewExpenseEvent.categorySelected({
+    required CategoryIcon? category,
+  }) = _CategorySelected;
 }

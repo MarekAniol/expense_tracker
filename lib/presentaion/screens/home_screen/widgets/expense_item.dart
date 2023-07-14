@@ -1,5 +1,5 @@
 import 'package:expense_tracker/domain/models/expense.dart';
-import 'package:expense_tracker/presentaion/extensions/category_extension.dart';
+import 'package:expense_tracker/presentaion/extensions/category_extensions.dart';
 import 'package:expense_tracker/presentaion/extensions/date_extensions.dart';
 import 'package:flutter/material.dart';
 
