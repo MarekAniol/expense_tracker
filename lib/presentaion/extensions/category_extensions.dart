@@ -15,6 +15,14 @@ extension CategoryExtensions on Category {
   }
 }
 
+extension CategoryIconExtension on List<CategoryIcon> {
+  List<CategoryIcon> get getCategories {
+    return where(
+      (category) => category != CategoryIcon.none,
+    ).map((category) => category).toList();
+  }
+}
+
 enum CategoryIcon {
   food(icon: Icon(Icons.food_bank)),
   transport(icon: Icon(Icons.car_rental)),

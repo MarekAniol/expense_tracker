@@ -1,3 +1,4 @@
+import 'package:expense_tracker/presentaion/widgets/new_expense_modal.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,7 +11,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   void _openMocalExpenseForm(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => const Text("Modal"),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      builder: (context) => const NewExpenseModal(),
     );
   }
 

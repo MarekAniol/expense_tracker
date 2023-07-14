@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:expense_tracker/domain/models/expense.dart';
+import 'package:expense_tracker/presentaion/extensions/category_extensions.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_new_expense_bloc.freezed.dart';
@@ -18,6 +19,8 @@ class CreateNewExpenseBloc extends Bloc<CreateNewExpenseEvent, CreateNewExpenseS
   ) async {
     await event.map(
       expenseCreated: (value) => _expenseCreated(value, emit),
+      datePicked: (value) => _datePicked(value, emit),
+      categorySelected: (value) => _categorySelected(value, emit),
     );
   }
 
@@ -35,6 +38,28 @@ class CreateNewExpenseBloc extends Bloc<CreateNewExpenseEvent, CreateNewExpenseS
     emit(
       state.copyWith(
         expense: expense,
+      ),
+    );
+  }
+
+  Future<void> _datePicked(
+    _DatePicked event,
+    Emitter<CreateNewExpenseState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        selectedDate: event.date,
+      ),
+    );
+  }
+
+  Future<void> _categorySelected(
+    _CategorySelected event,
+    Emitter<CreateNewExpenseState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        selectedCategory: event.category,
       ),
     );
   }
