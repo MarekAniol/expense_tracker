@@ -10,13 +10,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _openMocalExpenseForm(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
       ),
-      builder: (ctx) => NewExpenseModal(
-        homeContext: context,
-        modalContext: ctx,
+      builder: (ctx) => GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          color: Colors.transparent,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: NewExpenseModal(
+              homeContext: context,
+              modalContext: ctx,
+            ),
+          ),
+        ),
       ),
     );
   }
