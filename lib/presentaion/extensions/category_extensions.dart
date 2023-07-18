@@ -23,6 +23,27 @@ extension CategoryIconExtension on List<CategoryIcon> {
   }
 }
 
+extension CategoryConverter on CategoryIcon {
+  Category get toCategory {
+    switch (this) {
+      case CategoryIcon.food:
+        return Category.food;
+      case CategoryIcon.transport:
+        return Category.transport;
+      case CategoryIcon.shopping:
+        return Category.shopping;
+      case CategoryIcon.health:
+        return Category.health;
+      case CategoryIcon.entertainment:
+        return Category.entertainment;
+      case CategoryIcon.others:
+        return Category.others;
+      default:
+        throw ArgumentError('Invalid enum value: $this');
+    }
+  }
+}
+
 enum CategoryIcon {
   food(icon: Icon(Icons.food_bank)),
   transport(icon: Icon(Icons.car_rental)),

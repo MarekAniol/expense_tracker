@@ -27,5 +27,23 @@ extension DateCalendarExtensions on BuildContext {
 }
 
 extension NavigatorExtensions on BuildContext {
-  VoidCallback closeModal() => () => Navigator.of(this).pop();
+  void closeModal() => Navigator.pop(this);
+}
+
+extension PopUpExtension on BuildContext {
+  void showCustomPopup() {
+    showDialog(
+      context: this,
+      builder: (context) => AlertDialog(
+        title: const Text('Invalid input'),
+        content: const Text('Please enter a valid title, amount, date and category'),
+        actions: [
+          TextButton(
+            onPressed: () => context.closeModal(),
+            child: const Text('Okay'),
+          ),
+        ],
+      ),
+    );
+  }
 }

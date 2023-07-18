@@ -2,24 +2,38 @@ import 'package:expense_tracker/presentaion/bloc/create_new_expense/create_new_e
 import 'package:expense_tracker/presentaion/extensions/category_extensions.dart';
 import 'package:expense_tracker/presentaion/extensions/context_extensions.dart';
 import 'package:expense_tracker/presentaion/extensions/date_extensions.dart';
+import 'package:expense_tracker/presentaion/extensions/text_controller_extension.dart';
+import 'package:expense_tracker/presentaion/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewExpenseModal extends StatefulWidget {
-  const NewExpenseModal({super.key});
+  const NewExpenseModal({
+    required this.homeContext,
+    required this.modalContext,
+    super.key,
+  });
+
+  final BuildContext homeContext;
+  final BuildContext modalContext;
 
   @override
   State<NewExpenseModal> createState() => _NewExpenseModalState();
 }
 
 class _NewExpenseModalState extends State<NewExpenseModal> {
-  final _titleController = TextEditingController();
-  final _amountController = TextEditingController();
+  late final TextEditingController _controllerAmount;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerAmount = TextEditingController();
+  }
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _amountController.dispose();
+    _controllerAmount.dispose();
     super.dispose();
   }
 
@@ -30,8 +44,13 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
       child: Column(
         children: [
           TextFormField(
-            controller: _titleController,
-            onChanged: (value) {},
+            onChanged: (value) {
+              context.read<CreateNewExpenseBloc>().add(
+                    CreateNewExpenseEvent.titleAdded(
+                      title: value,
+                    ),
+                  );
+            },
             maxLength: 50,
             decoration: const InputDecoration(
               label: Text('Title'),
@@ -41,9 +60,23 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {},
+                  controller: _controllerAmount,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r'^\d*\.?,?\d{0,2}'),
+                    ),
+                  ],
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  onChanged: (value) {
+                    _controllerAmount.handleInput(value);
+                    context.read<CreateNewExpenseBloc>().add(
+                          CreateNewExpenseEvent.amountAdded(
+                            amount: _controllerAmount.text,
+                          ),
+                        );
+                  },
                   decoration: const InputDecoration(
                     prefixText: '\$ ',
                     label: Text('Amount'),
@@ -112,15 +145,35 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
                 );
               }),
               const Spacer(),
-              TextButton(
-                onPressed: context.closeModal,
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: implement save expense
+              Builder(builder: (context) {
+                return TextButton(
+                  onPressed: () => widget.modalContext.closeModal(),
+                  child: const Text('Cancel'),
+                );
+              }),
+              BlocConsumer<CreateNewExpenseBloc, CreateNewExpenseState>(
+                listenWhen: (_, current) => current.isValidated == true,
+                listener: (context, state) {
+                  widget.modalContext.closeModal();
+                  widget.homeContext.read<HomeScreenBloc>().add(
+                        HomeScreenEvent.expenseSaved(
+                          expense: state.expense,
+                        ),
+                      );
+                  context.read<CreateNewExpenseBloc>().add(
+                        const CreateNewExpenseEvent.stateExpenseReset(),
+                      );
                 },
-                child: const Text('Save'),
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      context.read<CreateNewExpenseBloc>().add(
+                            const CreateNewExpenseEvent.allExpenseDataCreated(),
+                          );
+                    },
+                    child: const Text('Save'),
+                  );
+                },
               )
             ],
           )
