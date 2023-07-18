@@ -14,7 +14,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
-      builder: (context) => const NewExpenseModal(),
+      builder: (ctx) => NewExpenseModal(
+        homeContext: context,
+        modalContext: ctx,
+      ),
     );
   }
 
