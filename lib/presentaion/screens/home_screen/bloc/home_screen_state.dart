@@ -6,6 +6,7 @@ class HomeScreenState with _$HomeScreenState {
     required List<Expense> expenses,
     required Expense lastDeletedExpense,
     required int? lastDeletedExpenseIndex,
+    required bool isExpenseDeleted,
   }) = _HomeScreenState;
 
   const HomeScreenState._();
@@ -14,6 +15,7 @@ class HomeScreenState with _$HomeScreenState {
         expenses: [],
         lastDeletedExpense: Expense.initial(),
         lastDeletedExpenseIndex: null,
+        isExpenseDeleted: false,
       );
 
   String getId(int index) => expenses[index].id;

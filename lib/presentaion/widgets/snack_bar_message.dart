@@ -15,7 +15,7 @@ class SnackBarMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HomeScreenBloc, HomeScreenState>(
       listenWhen: (previous, current) =>
-          previous.lastDeletedExpense != current.lastDeletedExpense &&
+          previous.isExpenseDeleted != current.isExpenseDeleted &&
           current.lastDeletedExpenseIndex != null,
       listener: (context, state) {
         context.showCustomSnackBar(

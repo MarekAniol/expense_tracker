@@ -62,6 +62,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
           state.copyWith(
             lastDeletedExpense: expense,
             lastDeletedExpenseIndex: updatedList.indexOf(expense),
+            isExpenseDeleted: !state.isExpenseDeleted,
           ),
         );
         break;
