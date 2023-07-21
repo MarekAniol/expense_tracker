@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:expense_tracker/domain/models/expense.dart';
@@ -64,7 +62,6 @@ class CreateNewExpenseBloc extends Bloc<CreateNewExpenseEvent, CreateNewExpenseS
           ),
         ),
       );
-      log('${state.expense}');
     }
   }
 

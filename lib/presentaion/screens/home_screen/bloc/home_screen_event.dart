@@ -9,4 +9,10 @@ class HomeScreenEvent with _$HomeScreenEvent {
     required Expense expense,
   }) = _ExpenseSaved;
   const factory HomeScreenEvent.getAllExpensesRequested() = _GetAllExpensesRequested;
+  const factory HomeScreenEvent.expenseRemovedFromList({
+    required String id,
+  }) = _ExpenseRemovedFromList;
+  const factory HomeScreenEvent.expenseAddedToList({
+    required Expense expense,
+  }) = _ExpenseAddedToList;
 }
