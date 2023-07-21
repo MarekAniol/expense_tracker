@@ -50,9 +50,7 @@ extension PopUpExtension on BuildContext {
   void showCustomSnackBar({
     required Function() onUndoPressed,
   }) {
-    ScaffoldMessenger.of(this).hideCurrentSnackBar(
-      reason: SnackBarClosedReason.remove,
-    );
+    ScaffoldMessenger.of(this).clearSnackBars();
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         duration: const Duration(
