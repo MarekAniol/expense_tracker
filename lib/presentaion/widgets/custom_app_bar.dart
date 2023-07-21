@@ -8,7 +8,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
   final double height;
 
-  void _openMocalExpenseForm(BuildContext context) {
+  void _openModalExpenseForm(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -44,7 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            _openMocalExpenseForm(
+            _openModalExpenseForm(
               context,
             );
           },

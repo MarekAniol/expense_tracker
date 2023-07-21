@@ -4,9 +4,19 @@ part of 'home_screen_bloc.dart';
 class HomeScreenState with _$HomeScreenState {
   const factory HomeScreenState({
     required List<Expense> expenses,
+    required Expense lastDeletedExpense,
+    required int? lastDeletedExpenseIndex,
   }) = _HomeScreenState;
 
-  factory HomeScreenState.initial() => const HomeScreenState(
+  const HomeScreenState._();
+
+  factory HomeScreenState.initial() => HomeScreenState(
         expenses: [],
+        lastDeletedExpense: Expense.initial(),
+        lastDeletedExpenseIndex: null,
       );
+
+  String getId(int index) => expenses[index].id;
+  int get deletedExpenseIndex => lastDeletedExpenseIndex ?? 0;
+  Expense get deletedExpense => lastDeletedExpense;
 }

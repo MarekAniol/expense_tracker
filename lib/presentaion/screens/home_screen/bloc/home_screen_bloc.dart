@@ -22,10 +22,11 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     Emitter<HomeScreenState> emit,
   ) async {
     await event.map(
-      expenseDeleted: (value) => _expenseDeleted(value, emit),
-      expenseSaved: (value) => _expenseSaved(value, emit),
-      getAllExpensesRequested: (value) => _getAllExpenses(value, emit),
-    );
+        expenseDeleted: (value) => _expenseDeleted(value, emit),
+        expenseSaved: (value) => _expenseSaved(value, emit),
+        getAllExpensesRequested: (value) => _getAllExpenses(value, emit),
+        expenseRemovedFromList: (value) => _expenseRemovedFromList(value, emit),
+        expenseAddedToList: (value) => _expenseAddedToList(value, emit));
   }
 
   Future<void> _getAllExpenses(
@@ -45,7 +46,52 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     Emitter<HomeScreenState> emit,
   ) async {
     await _expenseService.deleteExpense(event.id);
-    add(const HomeScreenEvent.getAllExpensesRequested());
+    add(
+      HomeScreenEvent.expenseRemovedFromList(id: event.id),
+    );
+  }
+
+  Future<void> _expenseRemovedFromList(
+    _ExpenseRemovedFromList event,
+    Emitter<HomeScreenState> emit,
+  ) async {
+    final updatedList = List<Expense>.from(state.expenses);
+    for (var expense in updatedList) {
+      if (expense.id == event.id) {
+        emit(
+          state.copyWith(
+            lastDeletedExpense: expense,
+            lastDeletedExpenseIndex: updatedList.indexOf(expense),
+          ),
+        );
+        break;
+      }
+    }
+
+    if (state.lastDeletedExpenseIndex != null) {
+      updatedList.removeAt(state.lastDeletedExpenseIndex!);
+      emit(
+        state.copyWith(
+          expenses: updatedList,
+        ),
+      );
+    }
+  }
+
+  Future<void> _expenseAddedToList(
+    _ExpenseAddedToList event,
+    Emitter<HomeScreenState> emit,
+  ) async {
+    final updatedList = List<Expense>.from(state.expenses);
+    updatedList.insert(
+      state.deletedExpenseIndex,
+      event.expense,
+    );
+    emit(
+      state.copyWith(
+        expenses: updatedList,
+      ),
+    );
   }
 
   Future<void> _expenseSaved(
@@ -53,6 +99,9 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     Emitter<HomeScreenState> emit,
   ) async {
     await _expenseService.saveExpense(event.expense);
-    add(const HomeScreenEvent.getAllExpensesRequested());
+
+    add(
+      HomeScreenEvent.expenseAddedToList(expense: event.expense),
+    );
   }
 }

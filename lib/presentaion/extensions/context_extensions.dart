@@ -46,4 +46,24 @@ extension PopUpExtension on BuildContext {
       ),
     );
   }
+
+  void showCustomSnackBar({
+    required Function() onUndoPressed,
+  }) {
+    ScaffoldMessenger.of(this).hideCurrentSnackBar(
+      reason: SnackBarClosedReason.remove,
+    );
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        duration: const Duration(
+          seconds: 5,
+        ),
+        content: const Text('Expense deleted'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: onUndoPressed,
+        ),
+      ),
+    );
+  }
 }
