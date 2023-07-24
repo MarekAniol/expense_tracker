@@ -16,41 +16,53 @@ class AppTheme {
 
   ThemeData theme(ColorPalette palette) {
     final theme = ThemeData().copyWith(
-      buttonTheme: ThemeData().buttonTheme.copyWith(
-            buttonColor: palette.accentColor,
-            textTheme: ButtonTextTheme.primary,
-          ),
-      snackBarTheme: SnackBarThemeData(
-        actionTextColor: palette.accentVariantColor,
-      ),
-      scaffoldBackgroundColor: palette.backgroundColor,
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: CustomMaterialColor.generateMaterialColor(
-          palette.primaryColorDark,
+        buttonTheme: ThemeData().buttonTheme.copyWith(
+              buttonColor: palette.accentColor,
+              textTheme: ButtonTextTheme.primary,
+            ),
+        snackBarTheme: SnackBarThemeData(
+          actionTextColor: palette.accentVariantColor,
         ),
-        primaryColorDark: palette.primaryColorDark,
-        accentColor: palette.accentColor,
-        cardColor: palette.cardColor,
-        backgroundColor: palette.backgroundColor,
+        scaffoldBackgroundColor: palette.backgroundColor,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: CustomMaterialColor.generateMaterialColor(
+            palette.primaryColorDark,
+          ),
+          primaryColorDark: palette.primaryColorDark,
+          accentColor: palette.accentColor,
+          cardColor: palette.cardColor,
+          backgroundColor: palette.backgroundColor,
+          brightness: palette.brightness,
+          errorColor: palette.errorColor,
+        ).copyWith(
+          secondaryContainer: palette.accentVariantColor,
+        ),
         brightness: palette.brightness,
-        errorColor: palette.errorColor,
-      ).copyWith(
-        secondaryContainer: palette.accentVariantColor,
-      ),
-      brightness: palette.brightness,
-      appBarTheme: const AppBarTheme().copyWith(
-        elevation: 0,
-        backgroundColor: palette.appBarColor,
-        foregroundColor: palette.accentVariantColor,
-      ),
-      textTheme: ThemeData().textTheme.apply(
-            bodyColor: palette.accentColor,
-            displayColor: palette.backgroundColor,
+        appBarTheme: const AppBarTheme().copyWith(
+          elevation: 0,
+          backgroundColor: palette.appBarColor,
+          foregroundColor: palette.accentVariantColor,
+        ),
+        textTheme: ThemeData().textTheme.apply(
+              bodyColor: palette.accentColor,
+              displayColor: palette.backgroundColor,
+            ),
+        iconTheme: ThemeData().iconTheme.copyWith(
+              color: palette.accentColor,
+            ),
+        cardTheme: const CardTheme().copyWith(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(18),
+            ),
           ),
-      iconTheme: ThemeData().iconTheme.copyWith(
-            color: palette.accentColor,
+          color: palette.cardColor,
+          elevation: 0,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 6,
           ),
-    );
+        ));
 
     return theme;
   }

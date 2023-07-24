@@ -1,7 +1,6 @@
 import 'package:expense_tracker/domain/models/expense.dart';
 import 'package:expense_tracker/presentaion/extensions/category_extensions.dart';
 import 'package:expense_tracker/presentaion/extensions/date_extensions.dart';
-import 'package:expense_tracker/presentaion/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseItem extends StatelessWidget {
@@ -15,7 +14,6 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: context.theme.colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
