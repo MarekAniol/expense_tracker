@@ -17,15 +17,15 @@ class Expense with _$Expense {
         title: "",
         amount: 0.0,
         date: DateTime.now(),
-        category: Category.others,
+        category: Category.sport,
       );
 }
 
 enum Category {
   food,
-  transport,
+  travels,
   shopping,
   health,
   entertainment,
-  others,
+  sport,
 }
