@@ -2,15 +2,22 @@ import 'package:expense_tracker/domain/models/expense.dart';
 import 'package:flutter/material.dart';
 
 extension CategoryExtensions on Category {
-  Icon get getIcon {
+  Icon getIcon(Color color) {
     String categoryToCheck = toString().split('.').last;
 
     if (CategoryIcon.values.any((v) => v.toString().split('.').last == categoryToCheck)) {
-      return CategoryIcon.values
-          .firstWhere((v) => v.toString().split('.').last == categoryToCheck)
-          .icon;
+      return Icon(
+        CategoryIcon.values
+            .firstWhere((v) => v.toString().split('.').last == categoryToCheck)
+            .icon
+            .icon,
+        color: color,
+      );
     } else {
-      return CategoryIcon.none.icon;
+      return Icon(
+        CategoryIcon.none.icon.icon,
+        color: color,
+      );
     }
   }
 }
