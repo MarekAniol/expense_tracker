@@ -35,16 +35,16 @@ extension CategoryConverter on CategoryIcon {
     switch (this) {
       case CategoryIcon.food:
         return Category.food;
-      case CategoryIcon.transport:
-        return Category.transport;
+      case CategoryIcon.travels:
+        return Category.travels;
       case CategoryIcon.shopping:
         return Category.shopping;
       case CategoryIcon.health:
         return Category.health;
       case CategoryIcon.entertainment:
         return Category.entertainment;
-      case CategoryIcon.others:
-        return Category.others;
+      case CategoryIcon.sport:
+        return Category.sport;
       default:
         throw ArgumentError('Invalid enum value: $this');
     }
@@ -52,12 +52,12 @@ extension CategoryConverter on CategoryIcon {
 }
 
 enum CategoryIcon {
-  food(icon: Icon(Icons.food_bank)),
-  transport(icon: Icon(Icons.car_rental)),
-  shopping(icon: Icon(Icons.shop)),
+  food(icon: Icon(Icons.restaurant)),
+  travels(icon: Icon(Icons.card_travel)),
+  shopping(icon: Icon(Icons.shopping_cart)),
   health(icon: Icon(Icons.health_and_safety)),
-  entertainment(icon: Icon(Icons.show_chart)),
-  others(icon: Icon(Icons.car_rental)),
+  entertainment(icon: Icon(Icons.attractions)),
+  sport(icon: Icon(Icons.fitness_center)),
   none(icon: Icon(Icons.close));
 
   const CategoryIcon({
