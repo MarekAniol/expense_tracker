@@ -1,6 +1,8 @@
 import 'package:expense_tracker/domain/models/expense.dart';
 import 'package:expense_tracker/presentaion/extensions/category_extensions.dart';
+import 'package:expense_tracker/presentaion/extensions/context_extensions.dart';
 import 'package:expense_tracker/presentaion/extensions/date_extensions.dart';
+import 'package:expense_tracker/presentaion/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseItem extends StatelessWidget {
@@ -20,8 +22,12 @@ class ExpenseItem extends StatelessWidget {
           vertical: 16,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expense.title),
+            Text(
+              expense.title,
+              style: context.textTheme.titleLarge,
+            ),
             const SizedBox(height: 4),
             Row(
               children: [
@@ -29,7 +35,9 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    expense.category.getIcon,
+                    expense.category.getIcon(
+                      context.palette.accentColor,
+                    ),
                     const SizedBox(width: 8),
                     Text(expense.date.formattedDate),
                   ],

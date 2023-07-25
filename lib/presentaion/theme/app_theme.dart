@@ -21,7 +21,11 @@ class AppTheme {
               textTheme: ButtonTextTheme.primary,
             ),
         snackBarTheme: SnackBarThemeData(
-          actionTextColor: palette.accentVariantColor,
+          behavior: SnackBarBehavior.floating,
+          actionTextColor: palette.cardColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
         ),
         scaffoldBackgroundColor: palette.backgroundColor,
         colorScheme: ColorScheme.fromSwatch(
@@ -43,12 +47,18 @@ class AppTheme {
           backgroundColor: palette.appBarColor,
           foregroundColor: palette.accentVariantColor,
         ),
-        textTheme: ThemeData().textTheme.apply(
+        textTheme: ThemeData()
+            .textTheme
+            .apply(
               bodyColor: palette.accentColor,
               displayColor: palette.backgroundColor,
-            ),
-        iconTheme: ThemeData().iconTheme.copyWith(
-              color: palette.accentColor,
+            )
+            .copyWith(
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: palette.accentColor,
+              ),
             ),
         cardTheme: const CardTheme().copyWith(
           shape: const RoundedRectangleBorder(

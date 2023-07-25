@@ -45,20 +45,20 @@ class DarkPalette implements ColorPalette {
   Color accentColor = const Color.fromARGB(255, 214, 220, 228);
 
   @override
-  Color backgroundColor = Colors.black;
+  Color backgroundColor = const Color.fromARGB(255, 24, 24, 24);
 
   @override
-  Color cardColor = const Color.fromARGB(255, 9, 42, 114);
+  Color cardColor = const Color.fromARGB(255, 9, 63, 114);
 
   @override
   Color errorColor = const Color.fromARGB(255, 235, 119, 119);
 
   @override
-  Color primaryColorDark = const Color.fromARGB(255, 20, 52, 140);
+  Color primaryColorDark = const Color.fromARGB(255, 156, 214, 248);
 
   @override
-  Color accentVariantColor = const Color.fromARGB(255, 214, 220, 228);
+  Color accentVariantColor = const Color.fromARGB(255, 218, 230, 247);
 
   @override
-  Color appBarColor = const Color.fromARGB(255, 9, 72, 114);
+  Color appBarColor = const Color.fromARGB(255, 3, 31, 53);
 }
