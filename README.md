@@ -31,4 +31,4 @@ After cloning the repository and setting up the necessary environment, you will 
 
 fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
----
+----------------------------------------------------------------------------------------------------------------
