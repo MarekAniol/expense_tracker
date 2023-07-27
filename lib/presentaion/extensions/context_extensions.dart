@@ -71,3 +71,8 @@ extension ThemeOfContext on BuildContext {
   TextTheme get textTheme => theme.textTheme;
   ColorScheme get colorScheme => theme.colorScheme;
 }
+
+extension MediaQueryOfContext on BuildContext {
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
+  Orientation get orientation => mediaQuery.orientation;
+}
