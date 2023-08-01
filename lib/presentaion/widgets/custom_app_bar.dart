@@ -1,4 +1,4 @@
-import 'package:expense_tracker/presentaion/widgets/new_expense_modal.dart';
+import 'package:expense_tracker/presentaion/widgets/expense_modal/new_expense_modal.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _openModalExpenseForm(BuildContext context) {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
@@ -24,14 +25,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         child: Container(
           color: Colors.transparent,
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: NewExpenseModal(
-              homeContext: context,
-              modalContext: ctx,
-            ),
+          child: NewExpenseModal(
+            homeContext: context,
+            modalContext: ctx,
           ),
         ),
       ),
@@ -41,7 +37,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       actions: [
         IconButton(
           onPressed: () {

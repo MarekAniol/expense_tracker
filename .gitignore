@@ -55,5 +55,6 @@ app.*.map.json
 .fvm/flutter_sdk
 **/*.freezed.dart
 **/*.g.dart
+**/*.mocks.dart
 
 **/*.gr.dart
