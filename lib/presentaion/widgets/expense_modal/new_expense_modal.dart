@@ -90,6 +90,7 @@ class _VerticalOrientationModal extends StatelessWidget {
         Row(
           children: [
             const Expanded(
+              flex: 3,
               child: CategoryPicker(),
             ),
             const Spacer(),
@@ -141,7 +142,6 @@ class _HorizontalOrientationModal extends StatelessWidget {
             Expanded(
               child: CategoryPicker(),
             ),
-            SizedBox(width: 24),
             Expanded(
               child: DatePicker(),
             ),
