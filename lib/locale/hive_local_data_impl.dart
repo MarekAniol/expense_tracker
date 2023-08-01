@@ -17,10 +17,9 @@ class HiveLocalDataImpl implements HiveLocalData {
 
   @override
   Future<void> initHive() async {
-    _hive.init(_documentsDirectory.path);
-    _hive.registerAdapter(ExpenseLocalModelAdapter());
-
     try {
+      _hive.init(_documentsDirectory.path);
+      _hive.registerAdapter(ExpenseLocalModelAdapter());
       _expenseBox = await _hive.openBox<ExpenseLocalModel>('expenseBox');
     } catch (error) {
       rethrow;

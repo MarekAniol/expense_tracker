@@ -44,7 +44,7 @@ class _ContentPageOrientation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.orientation == Orientation.portrait
+    return context.isPortrait
         ? const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
