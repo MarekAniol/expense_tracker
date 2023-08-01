@@ -75,4 +75,6 @@ extension ThemeOfContext on BuildContext {
 extension MediaQueryOfContext on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
   Orientation get orientation => mediaQuery.orientation;
+  int get keyboardHeight => mediaQuery.viewInsets.bottom.toInt();
+  bool get isPortrait => orientation == Orientation.portrait;
 }
